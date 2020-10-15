@@ -1,33 +1,49 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
+int read_int() {
+	
+	std::cout << "Please introduce a number" << std::endl;
+	
+	int n;
+	std::cin >> n;
+	
+	return n;
+
+}
 
 int main() {
 
-	//1- Open/Create the file stream
-	//2- While the file is open, you can write
-	//3- Close the file in order to keep the changes
+	std::cout << "How many number do you want to write?" << std::endl;
+	int total_numbers = read_int();
+
+	std::vector<int> values;
+
+	for (int i = 0; i < total_numbers; i++) {
+		int tmp = read_int();
+		values.push_back(tmp);
+
+	}
 
 	std::ofstream file;
-	file.open("/Users/Filip/FOCP_Lab2/new_file.txt");
-	file << "This is the first line!\n";
-	file << "This is the secong line!\n";
-	file << "This is the third line!\n";
+	file.open("/Users/Filip/FOCP_Lab2/values.txt");
+	
+	for (int i = 0; i < total_numbers; i++) {
+		file << values[i] << "\n";
+	}
+
 	file.close();
 
-	//1- Open/Create the file stream
-	//2- While the file is open, you can read
-	//3- Print the contents of the file
-	//4- Close the file in order to keep the changes
-
-	 std::ifstream new_file("/Users/Filip/FOCP_Lab2/new_file.txt");
+	std::vector<int> read_values;
+	std::ifstream new_file("/Users/Filip/FOCP_Lab2/values.txt");
 
 	if (new_file.is_open()) {
 	
 		std::string line;
-
-		while(getline(new_file, line)) {
-			std::cout << line << std::endl;
+	
+	while(getline(new_file, line)) {
+		read_values.push_back(std::stoi(line));
 		}
 	
 		new_file.close();
@@ -36,6 +52,16 @@ int main() {
 		std::cout << "There was a problem opening the file";
 	}
 
+	float sum = 0;
+
+	for (int i = 0; i < total_numbers; i++) {
+		sum += read_values[i];
+
+	}
+	
+	float mean = sum / total_numbers;
+
+		std::cout << "Mean = " << mean << std::endl;
 
 		return 0;
 }
