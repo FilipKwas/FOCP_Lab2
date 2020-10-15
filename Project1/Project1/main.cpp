@@ -1,24 +1,41 @@
 #include <iostream>
 
-int main() {
-	
-	// 1 - Read a number form a console
-	// 2 - Figure out if the number is prime or not
-	// 3 - Print the result to the console
+// [return type] [name of the function] ([arguments]) ----> signature
 
+bool is_prime(int number) {
+
+	for (int i = 2; i < number; i++) {
+		if (number % i == 0) {
+			return false;
+		}
+	}
+	
+	return true;
+
+}
+
+
+
+int read_int() {
 	std::cout << "Please introduce a number: " << std::endl;
 
 	int number;
 	std::cin >> number;
+	return number;
+}
 
-	for (int i = 2; i < number; i++) {
-		if (number % i == 0) {
-			std::cout << "Your number is not prime" << std::endl;
-			return 0;
-		}
-	}
+
+int main() {
 	
-	std::cout << "Your number is prime" << std::endl;
+	int number = read_int();
+
+	if (is_prime(number)) {
+		std::cout << "Your number is prime" << std::endl;
+	}
+	else {
+
+		std::cout << "Your number is not prime" << std::endl;
+	}
 
 	return 0;
 }
